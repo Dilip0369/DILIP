@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Portfolio</title>
+  <style>
+    body{margin:0;font-family:sans-serif;background:#f4f4f4;color:#333}
+    header{display:flex;align-items:center;gap:16px;background:#222;color:#fff;padding:16px}
+    header img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid #fff}
+    header .info h1{margin:0;font-size:1.5em}
+    header .info p{margin:4px 0 0;font-size:1em}
+  </style>
+</head>
+<body>
+  <header>
+    <img src="D.K" alt="" id="profilePic">
+    <div class="info">
+      <h1 id="myName">dilip kumar</h1>
+      <p id="contactNumber">📞 +91-7698391409</p>
+    </div>
+  </header>
+
+  <main style="padding:20px">
+    <h2>Mere Projects</h2>
+    <p>dilip kumar.</p>
+  </main>
+   <main style="padding:20px">
+    <h2>Mere Projects</h2>
+    <div class="gallery" id="gallery">
+      <!-- Gallery items yahan add honge -->
+    </div>
+  </main>
+
+
+  <script>
+    // Example: set name, photo, and contact dynamically
+    document.getElementById('myName').textContent = 'DILIP KUMAR.'; // Apna naam yahan likho
+    document.getElementById('contactNumber').textContent = '📞 +91-7698391409'; // Apna number yahan likho
+    document.getElementById('profilePic').src = 'mera-photo.jpg'; // Apne photo ka path yahan do
+  </script>
+</body>
+</html>
+
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Portfolio - Local Upload & Gallery</title>
+  <style>
+   
+   :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;color-scheme:dark}
+    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{margin:0;background:linear-gradient(180deg,#071024 0%,#081428 100%);color:#e6eef6;padding:24px}
+    .container{max-width:1100px;margin:0 auto}
+    header{display:flex;gap:16px;align-items:center;margin-bottom:18px}
+    .avatar{width:84px;height:84px;border-radius:12px;overflow:hidden;background:#022033;display:grid;place-items:center}
+    .card{background:rgba(255,255,255,0.03);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    h1{margin:0;font-size:20px}
+    .top-grid{display:grid;grid-template-columns:1fr 360px;gap:16px;margin-bottom:16px}
+    label{display:block;font-size:13px;margin-bottom:6px;color:var(--muted)}
+    input[type='text'],textarea,select{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+    .uploader{display:flex;gap:8px;align-items:center}
+    .btn{background:var(--accent);border:none;padding:8px 12px;border-radius:10px;color:#022;cursor:pointer}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:12px}
+    .item{background:rgba(0,0,0,0.45);border-radius:10px;padding:8px;position:relative}
+    .thumb{width:100%;height:120px;object-fit:cover;border-radius:8px;background:#001122}
+    .meta{font-size:13px;margin-top:6px}
+    .controls{display:flex;gap:6px;margin-top:6px}
+    .small{padding:6px 8px;font-size:13px}
+    .skills{display:flex;gap:6px;flex-wrap:wrap}
+    .tag{background:rgba(255,255,255,0.04);padding:6px 8px;border-radius:999px;font-size:13px}
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+    .note{font-size:13px;color:var(--muted);margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="avatar card" id="profilePreview">PROFILE</div>
+      <div>
+        <h1>Merā Portfolio — Photos & Videos Uploader</h1>
+        <div class="note">Files browser me saved rahenge (same browser & device). Agar aap chahen toh main server-side version bhi bata dunga.</div>
+      </div>
+    </header>
+
+    <div class="top-grid">
+      <div class="card">
+        <h2 style="margin-top:0">Upload Media</h2>
+        <div style="margin-top:8px">
+          <label>Choose photos/videos (multiple):</label>
+          <div class="uploader">
+            <input id="fileInput" type="file" accept="image/*,video/*" multiple />
+            <button id="addBtn" class="btn">Add to Gallery</button>
+            <button id="clearAll" class="btn secondary">Clear All</button>
+          </div>
+          <label style="margin-top:10px">Description (optional for selected files):</label>
+          <input id="descInput" type="text" placeholder="Short description for selected files" />
+        </div>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.04)" />
+
+        <h3>Profile & Skills</h3>
+        <label>Set Profile Photo:</label>
+        <input id="profileInput" type="file" accept="image/*" />
+        <label style="margin-top:8px">Your Name:</label>
+        <input id="nameInput" type="text" placeholder="Aapka naam" />
+        <label style="margin-top:8px">Skills (comma separated):</label>
+        <input id="skillsInput" type="text" placeholder="e.g. Graphic Design, Video Editing" />
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <button id="saveProfile" class="btn">Save Profile</button>
+          <button id="exportBtn" class="btn secondary">Export Backup</button>
+          <button id="importBtn" class="btn secondary">Import Backup</button>
+          <input id="importFile" type="file" accept="application/json" style="display:none" />
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Preview & Info</h3>
+        <div style="margin-top:8px">
+          <strong id="ownerName">Your Name</strong>
+          <div class="skills" id="skillsList"></div>
+          <div class="note">Gallery count: <span id="count">0</span></div>
+          <div style="margin-top:12px">
+            <button id="openGalleryBtn" class="btn">Open Gallery View</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="card" style="margin-top:8px">
+      <h2 style="margin-top:0">Gallery</h2>
+      <div id="gallery" class="gallery"></div>
+    </section>
+
+    <footer>
+      Tip: Ye solution browser-local storage/IndexedDB use karta hai — agar aap chahte hain ki files internet pe kisi bhi device se dikhen, toh mujhe bataiye; main simple server (Node.js + storage) ka code bhi de dunga.
+    </footer>
+  </div>
+
+  <script>
+  // Minimal IndexedDB wrapper
+  const DB_NAME = 'portfolioDB_v1';
+  const STORE = 'media';
+  let db;
+
+  function openDB(){
+    return new Promise((resolve, reject)=>{
+      const r = indexedDB.open(DB_NAME,1);
+      r.onupgradeneeded = e => {
+        const d = e.target.result;
+        if(!d.objectStoreNames.contains(STORE)){
+          d.createObjectStore(STORE,{keyPath:'id'});
+        }
+      };
+      r.onsuccess = e => { db = e.target.result; resolve(db); };
+      r.onerror = e => reject(e.target.error);
+    });
+  }
+
+  function putItem(item){
+    return new Promise((res,rej)=>{
+      const tx = db.transaction(STORE,'readwrite');
+      tx.objectStore(STORE).put(item);
+      tx.oncomplete = ()=>res(true);
+      tx.onerror = e=>rej(e.target.error);
+    });
+  }
+  function getAll(){
+    return new Promise((res,rej)=>{
+      const tx = db.transaction(STORE,'readonly');
+      const req = tx.objectStore(STORE).getAll();
+      req.onsuccess = ()=>res(req.result);
+      req.onerror = e=>rej(e.target.error);
+    });
+  }
+  function clearAllItems(){
+    return new Promise((res,rej)=>{
+      const tx = db.transaction(STORE,'readwrite');
+      const req = tx.objectStore(STORE).clear();
+      req.onsuccess = ()=>res(true);
+      req.onerror = e=>rej(e.target.error);
+    });
+  }
+
+  // Helpers
+  function fileToDataURL(file){
+    return new Promise((res,rej)=>{
+      const r = new FileReader();
+      r.onload = ()=>res(r.result);
+      r.onerror = e=>rej(e);
+      r.readAsDataURL(file);
+    });
+  }
+
+  // UI bindings
+  const fileInput = document.getElementById('fileInput');
+  const addBtn = document.getElementById('addBtn');
+  const gallery = document.getElementById('gallery');
+  const countEl = document.getElementById('count');
+  const descInput = document.getElementById('descInput');
+  const clearAllBtn = document.getElementById('clearAll');
+  const profileInput = document.getElementById('profileInput');
+  const profilePreview = document.getElementById('profilePreview');
+  const saveProfileBtn = document.getElementById('saveProfile');
+  const nameInput = document.getElementById('nameInput');
+  const skillsInput = document.getElementById('skillsInput');
+  const ownerName = document.getElementById('ownerName');
+  const skillsList = document.getElementById('skillsList');
+  const exportBtn = document.getElementById('exportBtn');
+  const importBtn = document.getElementById('importBtn');
+  const importFile = document.getElementById('importFile');
+  const openGalleryBtn = document.getElementById('openGalleryBtn');
+
+  // Profile stored in localStorage
+  function saveProfileLocal(profile){
+    localStorage.setItem('pf_profile', JSON.stringify(profile));
+  }
+  function loadProfile(){
+    const p = localStorage.getItem('pf_profile');
+    if(!p) return null;
+    try{return JSON.parse(p);}catch(e){return null}
+  }
+  function renderProfile(){
+    const p = loadProfile();
+    if(!p) return;
+    ownerName.textContent = p.name || 'Your Name';
+    skillsList.innerHTML = '';
+    (p.skills||[]).forEach(s=>{
+      const el = document.createElement('div'); el.className='tag'; el.textContent = s; skillsList.appendChild(el);
+    });
+    if(p.photo){ profilePreview.innerHTML = `<img src="${p.photo}" style="width:100%;height:100%;object-fit:cover"/>`; }
+  }
+
+  async function refreshGallery(){
+    const items = await getAll();
+    gallery.innerHTML = '';
+    countEl.textContent = items.length;
+    items.sort((a,b)=>b.created - a.created);
+    items.forEach(it=>{
+      const card = document.createElement('div'); card.className='item';
+      if(it.type.startsWith('image')){
+        card.innerHTML = `
+          <img class="thumb" src="${it.data}" alt="${it.name}" />
+          <div class="meta">${it.name}</div>
+          <div class="controls">
+            <button class="small" onclick='viewMedia("${it.id}")'>View</button>
+            <button class="small" onclick='downloadMedia("${it.id}")'>Download</button>
+            <button class="small" onclick='deleteMedia("${it.id}")'>Delete</button>
+          </div>
+        `;
+      } else {
+        card.innerHTML = `
+          <video class="thumb" src="${it.data}" controls playsinline></video>
+          <div class="meta">${it.name} <div style="font-size:12px;color:var(--muted)">${(it.type||'video').split('/')[1]}</div></div>
+          <div class="controls">
+            <button class="small" onclick='viewMedia("${it.id}")'>Open</button>
+            <button class="small" onclick='downloadMedia("${it.id}")'>Download</button>
+            <button class="small" onclick='deleteMedia("${it.id}")'>Delete</button>
+          </div>
+        `;
+      }
+      gallery.appendChild(card);
+    });
+  }
+
+  // Global helper functions exposed for onClick in generated HTML
+  window.viewMedia = async function(id){
+    const items = await getAll();
+    const it = items.find(x=>x.id===id);
+    if(!it) return alert('Not found');
+    const w = window.open('','_blank');
+    w.document.write(`<title>${it.name}</title>`);
+    if(it.type.startsWith('image')){
+      w.document.write(`<img src="${it.data}" style="max-width:100%;height:auto;display:block;margin:24px auto"/>`);
+    } else {
+      w.document.write(`<video controls style="max-width:100%;display:block;margin:24px auto" src="${it.data}"></video>`);
+    }
+  }
+
+  window.downloadMedia = async function(id){
+    const items = await getAll();
+    const it = items.find(x=>x.id===id);
+    if(!it) return alert('Not found');
+    const a = document.createElement('a');
+    a.href = it.data; a.download = it.name || 'media';
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  window.deleteMedia = async function(id){
+    if(!confirm('Delete this item?')) return;
+    const tx = db.transaction(STORE,'readwrite');
+    tx.objectStore(STORE).delete(id);
+    tx.oncomplete = ()=>refreshGallery();
+  }
+
+  addBtn.addEventListener('click', async ()=>{
+    if(!fileInput.files.length) return alert('Kuch file select karo');
+    const desc = descInput.value.trim();
+    for(const f of fileInput.files){
+      const data = await fileToDataURL(f);
+      const item = {id:crypto.randomUUID(), name:f.name, type:f.type, data, desc, created:Date.now()};
+      await putItem(item);
+    }
+    fileInput.value = '';
+    descInput.value = '';
+    refreshGallery();
+  });
+
+  clearAllBtn.addEventListener('click', async ()=>{
+    if(!confirm('Saare gallery items clear karna hai?')) return;
+    await clearAllItems();
+    refreshGallery();
+  });
+
+  profileInput.addEventListener('change', async (e)=>{
+    const f = e.target.files[0]; if(!f) return;
+    const data = await fileToDataURL(f);
+    const p = loadProfile()||{}; p.photo = data; saveProfileLocal(p); renderProfile();
+  });
+
+  saveProfile.addEventListener('click', ()=>{
+    const name = nameInput.value.trim();
+    const skills = skillsInput.value.split(',').map(s=>s.trim()).filter(Boolean);
+    const p = loadProfile()||{}; p.name = name; p.skills = skills; saveProfileLocal(p); renderProfile();
+    alert('Profile saved');
+  });
+
+  exportBtn.addEventListener('click', async ()=>{
+    const items = await getAll();
+    const p = loadProfile();
+    const payload = {profile:p, items};
+    const blob = new Blob([JSON.stringify(payload)],{type:'application/json'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'portfolio-backup.json'; document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  importBtn.addEventListener('click', ()=>importFile.click());
+  importFile.addEventListener('change', async (e)=>{
+    const f = e.target.files[0]; if(!f) return; const text = await f.text();
+    try{
+      const parsed = JSON.parse(text);
+      if(parsed.profile) saveProfileLocal(parsed.profile);
+      if(Array.isArray(parsed.items)){
+        for(const it of parsed.items){ await putItem(it); }
+      }
+      renderProfile(); refreshGallery();
+      alert('Import complete');
+    }catch(err){ alert('Invalid file'); }
+  });
+
+  openGalleryBtn.addEventListener('click', ()=>{
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  });
+
+  // Init
+  (async ()=>{
+    await openDB();
+    renderProfile();
+    refreshGallery();
+  })();
+  </script>
+</body>
+</html>
